@@ -1,0 +1,14 @@
+[package]
+name = "c-linked-list"
+version = "0.1.0"
+authors = ["Katsutoshi Horie <mps299792458@gmail.com>"]
+license = "MIT/Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/hrektts/c-linked-list"
+homepage = "https://github.com/hrektts/c-linked-list"
+documentation = "https://katsutoshihorie.com/c-linked-list"
+description = """
+A linked list for wrapping a C linked list.
+"""
+
+[dependencies]

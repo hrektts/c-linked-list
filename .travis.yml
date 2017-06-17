@@ -1,0 +1,31 @@
+language: rust
+
+sudo: false
+matrix:
+  include:
+    - os: linux
+      rust: nightly
+      env:
+        - FORMAT=1
+        - BENCH=1
+      before_script:
+        - pip install 'travis-cargo<0.2' --user && export PATH=$HOME/.local/bin:$PATH
+        - travis_wait 30 cargo install -f rustfmt
+      after_success:
+        - travis-cargo doc-upload
+    - os: osx
+      rust: nightly
+script:
+  - if [ "$FORMAT" = "1" ]; then cargo fmt -- --write-mode=diff; fi
+  - cargo build
+  - cargo test
+  - rustdoc --test README.md -L target/debug -L target/debug/deps
+  - cargo doc --no-deps
+  - if [ "$BENCH" = "1" ]; then cargo bench; fi
+env:
+  global:
+    - secure: GOptwNJrmMvGN5SOPtXh6RTtB6rjGtv1RZsnK9Kv/kweX7cNKpvzqZT9fBFuwU8J/nrrCAaHKEbpu8ACZ1zZgX+vYwLNWkfAhwq7B6eHL/sosNl0KqLL3ZrnqRZiJc3aboyHDIBB5XqnQJAbiV06L84dG5PA73INU6yiAzI9mIyCnsurnillAk4+8L6KpcSgqsxa61b635l7yR5ISdL8S53YS9qCEf8zUfN0bST/lunSnKmXF08Nl4tR6Yv5eeRRj94bKFoc31XGw80yXGCuAHm9p16nZGq3fD+nWM2+FeLwHCu3vWs+nPgefyhlHBREdYEzqELCMB/xwfGeWUG7EXiE1/a6lVmDXyXCtfqFpURTS/ZlQlB/m7X09csKnwhnDq92r0OgPYz/T7SoAqM4RQvLyupo35bBcrER9WKvxGNQNUN8mFfRzlozjnsVXiJ3w+m/K0RCaDslwEquGrU/K5sBPUlsBvyyASzw6uuLcdGlcbfskDl9mUgMd6S3AfrLv0meBzkkheRunA6P4yFijemaPUulw893heChTZMJ/JtWZI5FE/K0ycE/UipMelfXzsVZv5JrRLKpJBCKovjCJJA3NhuJTTNFO3IRNNCJG9AMEdvvVKzgLCrGcm1+uzHOb7FwohAzAVsSIHTB6us29pNgFGvvHwTVZUsWifbTjXI=
+
+notifications:
+  email:
+    on_success: never
