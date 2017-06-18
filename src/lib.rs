@@ -363,7 +363,10 @@ mod tests {
         let vs = list.iter().map(|n| n.val).collect::<Vec<_>>();
         assert_eq!(vs, &[]);
         assert_eq!(list.len(), 0);
-        assert!(!list.contains(&TestNodeConst { val: 0, next: std::ptr::null() }));
+        assert!(!list.contains(&TestNodeConst {
+            val: 0,
+            next: std::ptr::null(),
+        }));
         assert!(list.is_empty());
         assert!(list.front().is_none());
 
@@ -372,8 +375,14 @@ mod tests {
         let vs = list.iter().map(|n| n.val).collect::<Vec<_>>();
         assert_eq!(vs, &[1, 2, 3]);
         assert_eq!(list.len(), 3);
-        assert!(!list.contains(&TestNodeConst { val: 0, next: std::ptr::null() }));
-        assert!(list.contains(&TestNodeConst { val: 3, next: std::ptr::null() }));
+        assert!(!list.contains(&TestNodeConst {
+            val: 0,
+            next: std::ptr::null(),
+        }));
+        assert!(list.contains(&TestNodeConst {
+            val: 3,
+            next: std::ptr::null(),
+        }));
         assert!(!list.is_empty());
         assert_eq!(list.front().unwrap().val, 1);
     }
@@ -408,7 +417,10 @@ mod tests {
         let vs = list.iter().map(|n| n.val).collect::<Vec<_>>();
         assert_eq!(vs, &[]);
         assert_eq!(list.len(), 0);
-        assert!(!list.contains(&TestNodeMut { val: 0, next: std::ptr::null_mut() }));
+        assert!(!list.contains(&TestNodeMut {
+            val: 0,
+            next: std::ptr::null_mut(),
+        }));
         assert!(list.is_empty());
         assert!(list.front().is_none());
 
@@ -417,8 +429,14 @@ mod tests {
         let vs = list.iter().map(|n| n.val).collect::<Vec<_>>();
         assert_eq!(vs, &[1, 2, 3]);
         assert_eq!(list.len(), 3);
-        assert!(!list.contains(&TestNodeMut { val: 0, next: std::ptr::null_mut() }));
-        assert!(list.contains(&TestNodeMut { val: 3, next: std::ptr::null_mut() }));
+        assert!(!list.contains(&TestNodeMut {
+            val: 0,
+            next: std::ptr::null_mut(),
+        }));
+        assert!(list.contains(&TestNodeMut {
+            val: 3,
+            next: std::ptr::null_mut(),
+        }));
         assert!(!list.is_empty());
         assert_eq!(list.front().unwrap().val, 1);
 
