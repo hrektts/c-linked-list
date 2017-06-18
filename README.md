@@ -4,7 +4,7 @@ A linked list for wrapping a C linked list in Rust (nightly).
 
 [![Build Status](https://travis-ci.org/hrektts/c-linked-list.svg?branch=master)](https://travis-ci.org/hrektts/c-linked-list)
 
-[Documentation](http://katsutoshihorie.com/c-linked-list)
+[Documentation](https://katsutoshihorie.com/c-linked-list)
 
 ## Usage
 
