@@ -1,4 +1,4 @@
-# c-linked-list-rs
+# c-linked-list
 
 A linked list for wrapping a C linked list in Rust (nightly).
 
