@@ -83,19 +83,21 @@ where
     /// the head element of the list or is NULL for a list of length 0.
     /// `next` is a function that takes an element and returns an immutable raw
     /// pointer to the next element.
-    pub unsafe fn from_const_ptr(head: *const T, next: F) -> Self {
-        Self {
-            element: Shared::new(head as *mut T),
-            next: next,
-        }
+    pub fn from_const_ptr(head: *const T, next: F) -> Option<Self> {
+        Shared::new(head as *mut T).map(|p| {
+            Self {
+                element: p,
+                next: next,
+            }
+        })
     }
 
     /// Returns the length of the `CLinkedList`.
     pub fn len(&self) -> usize {
         let mut e = self.element;
-        let mut ret = 0;
-        while !e.as_ptr().is_null() {
-            e = unsafe { Shared::new((self.next)(e.as_ref()) as *mut T) };
+        let mut ret = 1;
+        while let Some(p) = Shared::new((self.next)(unsafe { e.as_ref() }) as *mut T) {
+            e = p;
             ret += 1;
         }
         ret
@@ -119,11 +121,13 @@ where
     /// the head element of the list or is NULL for a list of length 0.
     /// `next` is a function that takes an element and returns a mutable raw
     /// pointer to the next element.
-    pub unsafe fn from_mut_ptr(head: *mut T, next: F) -> Self {
-        Self {
-            element: Shared::new(head),
-            next: next,
-        }
+    pub fn from_mut_ptr(head: *mut T, next: F) -> Option<Self> {
+        Shared::new(head).map(|p| {
+            Self {
+                element: p,
+                next: next,
+            }
+        })
     }
 
     /// Provides a forward iterator with mutable references.
@@ -137,9 +141,9 @@ where
     /// Returns the length of the `CLinkedList`.
     pub fn len(&self) -> usize {
         let mut e = self.element;
-        let mut ret = 0;
-        while !e.as_ptr().is_null() {
-            e = unsafe { Shared::new((self.next)(e.as_ref())) };
+        let mut ret = 1;
+        while let Some(p) = Shared::new((self.next)(unsafe { e.as_ref() })) {
+            e = p;
             ret += 1;
         }
         ret
@@ -359,19 +363,10 @@ mod tests {
     #[test]
     fn test_using_const_ptr() {
         let ptr: *const TestNodeConst = std::ptr::null();
-        let list = unsafe { CLinkedList::from_const_ptr(ptr, |n| n.next) };
-        let vs = list.iter().map(|n| n.val).collect::<Vec<_>>();
-        assert_eq!(vs, &[]);
-        assert_eq!(list.len(), 0);
-        assert!(!list.contains(&TestNodeConst {
-            val: 0,
-            next: std::ptr::null(),
-        }));
-        assert!(list.is_empty());
-        assert!(list.front().is_none());
+        assert!(CLinkedList::from_const_ptr(ptr, |n| n.next).is_none());
 
         let ptr = make_list_const();
-        let list = unsafe { CLinkedList::from_const_ptr(ptr, |n| n.next) };
+        let list = CLinkedList::from_const_ptr(ptr, |n| n.next).unwrap();
         let vs = list.iter().map(|n| n.val).collect::<Vec<_>>();
         assert_eq!(vs, &[1, 2, 3]);
         assert_eq!(list.len(), 3);
@@ -413,19 +408,10 @@ mod tests {
     #[test]
     fn test_using_mut_ptr() {
         let ptr: *mut TestNodeMut = std::ptr::null_mut();
-        let list = unsafe { CLinkedList::from_mut_ptr(ptr, |n| n.next) };
-        let vs = list.iter().map(|n| n.val).collect::<Vec<_>>();
-        assert_eq!(vs, &[]);
-        assert_eq!(list.len(), 0);
-        assert!(!list.contains(&TestNodeMut {
-            val: 0,
-            next: std::ptr::null_mut(),
-        }));
-        assert!(list.is_empty());
-        assert!(list.front().is_none());
+        assert!(CLinkedList::from_mut_ptr(ptr, |n| n.next).is_none());
 
         let ptr = make_list_mut();
-        let mut list = unsafe { CLinkedList::from_mut_ptr(ptr, |n| n.next) };
+        let mut list = CLinkedList::from_mut_ptr(ptr, |n| n.next).unwrap();
         let vs = list.iter().map(|n| n.val).collect::<Vec<_>>();
         assert_eq!(vs, &[1, 2, 3]);
         assert_eq!(list.len(), 3);
