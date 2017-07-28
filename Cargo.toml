@@ -1,6 +1,6 @@
 [package]
 name = "c-linked-list"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Katsutoshi Horie <mps299792458@gmail.com>"]
 license = "MIT/Apache-2.0"
 readme = "README.md"
