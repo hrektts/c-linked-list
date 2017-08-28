@@ -24,3 +24,11 @@ extern crate c_linked_list;
 ## References
 
 - [c_linked_list](https://github.com/canndrew/c_linked_list)
+
+## License
+
+`c-linked-list` is primarily distributed under the terms of both the MIT license
+and the Apache License (Version 2.0), with portions covered by various BSD-like
+licenses.
+
+See LICENSE-APACHE, and LICENSE-MIT for details.
