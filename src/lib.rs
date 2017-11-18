@@ -206,14 +206,17 @@ where
     #[inline]
     fn next(&mut self) -> Option<Self::Item> {
         self.prev
-            .map_or_else(|| Some(self.list.element.as_ptr()), |prev| {
-                Some((self.list.next)(prev) as *mut T)
-            })
-            .and_then(|p_element| if p_element.is_null() {
-                None
-            } else {
-                self.prev = unsafe { p_element.as_ref() };
-                self.prev
+            .map_or_else(
+                || Some(self.list.element.as_ptr()),
+                |prev| Some((self.list.next)(prev) as *mut T),
+            )
+            .and_then(|p_element| {
+                if p_element.is_null() {
+                    None
+                } else {
+                    self.prev = unsafe { p_element.as_ref() };
+                    self.prev
+                }
             })
     }
 
@@ -234,14 +237,17 @@ where
     #[inline]
     fn next(&mut self) -> Option<Self::Item> {
         self.prev
-            .map_or_else(|| Some(self.list.element.as_ptr()), |prev| {
-                Some((self.list.next)(prev))
-            })
-            .and_then(|p_element| if p_element.is_null() {
-                None
-            } else {
-                self.prev = unsafe { p_element.as_ref() };
-                self.prev
+            .map_or_else(
+                || Some(self.list.element.as_ptr()),
+                |prev| Some((self.list.next)(prev)),
+            )
+            .and_then(|p_element| {
+                if p_element.is_null() {
+                    None
+                } else {
+                    self.prev = unsafe { p_element.as_ref() };
+                    self.prev
+                }
             })
     }
 
