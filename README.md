@@ -27,8 +27,11 @@ extern crate c_linked_list;
 
 ## License
 
-`c-linked-list` is primarily distributed under the terms of both the MIT license
-and the Apache License (Version 2.0), with portions covered by various BSD-like
-licenses.
+This project is licensed under either of
 
-See LICENSE-APACHE, and LICENSE-MIT for details.
+ * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
+   http://www.apache.org/licenses/LICENSE-2.0)
+ * MIT license ([LICENSE-MIT](LICENSE-MIT) or
+   http://opensource.org/licenses/MIT)
+
+at your option.
