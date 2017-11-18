@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `CLinkedList` struct in crate `c_linked_list`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, CLinkedList">
+
+    <title>c_linked_list::CLinkedList - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc struct">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Struct CLinkedList</p><div class="block items"><a class="sidebar-title" href="#methods">Methods</a><div class="sidebar-links"><a href="#method.from_const_ptr">from_const_ptr</a><a href="#method.len">len</a><a href="#method.contains">contains</a><a href="#method.from_mut_ptr">from_mut_ptr</a><a href="#method.iter_mut">iter_mut</a><a href="#method.len">len</a><a href="#method.contains">contains</a><a href="#method.front_mut">front_mut</a><a href="#method.iter">iter</a><a href="#method.is_empty">is_empty</a><a href="#method.front">front</a></div><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-IntoIterator">IntoIterator</a><a href="#impl-Debug">Debug</a></div></div><p class='location'><a href='index.html'>c_linked_list</a></p><script>window.sidebarCurrent = {name: 'CLinkedList', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>c_linked_list</a>::<wbr><a class="struct" href=''>CLinkedList</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/c_linked_list/lib.rs.html#19-22' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct CLinkedList&lt;T, P, F:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T) -&gt; P&gt; { /* fields omitted */ }</pre><div class='docblock'><p>A linked list for wrapping a C linked list.</p>
+
+<p>This <code>struct</code> is created by the <a href="struct.CLinkedList.html#method.from_const_ptr"><code>from_const_ptr</code></a> method and
+<a href="struct.CLinkedList.html#method.from_mut_ptr"><code>from_mut_ptr</code></a> method from a C linked list that elements are linked
+by immutable pointers and mutable pointers, respectively.
+See their documentation for more.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><code>impl&lt;T, F&gt; <a class="struct" href="../c_linked_list/struct.CLinkedList.html" title="struct c_linked_list::CLinkedList">CLinkedList</a>&lt;T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const T</a>, F&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const T</a>,&nbsp;</span></code><a href='#impl' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#78-114' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from_const_ptr' class="method"><span id='from_const_ptr.v' class='invisible'><code>pub fn <a href='#method.from_const_ptr' class='fnname'>from_const_ptr</a>(head: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const T</a>, next: F) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;Self&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#86-93' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Creates a <code>CLinkedList</code> by wrapping a C linked list. <code>head</code> points to
+the head element of the list or is NULL for a list of length 0.
+<code>next</code> is a function that takes an element and returns an immutable raw
+pointer to the next element.</p>
+</div><h4 id='method.len' class="method"><span id='len.v' class='invisible'><code>pub fn <a href='#method.len' class='fnname'>len</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#96-104' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns the length of the <code>CLinkedList</code>.</p>
+</div><h4 id='method.contains' class="method"><span id='contains.v' class='invisible'><code>pub fn <a href='#method.contains' class='fnname'>contains</a>(&amp;self, x: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a>&lt;T&gt;,&nbsp;</span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#108-113' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns <code>true</code> if the <code>CLinkedList</code> contains an element equal to the
+given value.</p>
+</div></div><h3 id='impl-1' class='impl'><span class='in-band'><code>impl&lt;T, F&gt; <a class="struct" href="../c_linked_list/struct.CLinkedList.html" title="struct c_linked_list::CLinkedList">CLinkedList</a>&lt;T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>, F&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>,&nbsp;</span></code><a href='#impl-1' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#116-170' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from_mut_ptr' class="method"><span id='from_mut_ptr.v' class='invisible'><code>pub fn <a href='#method.from_mut_ptr' class='fnname'>from_mut_ptr</a>(head: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>, next: F) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;Self&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#124-131' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Creates a <code>CLinkedList</code> by wrapping a C linked list. <code>head</code> points to
+the head element of the list or is NULL for a list of length 0.
+<code>next</code> is a function that takes an element and returns a mutable raw
+pointer to the next element.</p>
+</div><h4 id='method.iter_mut' class="method"><span id='iter_mut.v' class='invisible'><code>pub fn <a href='#method.iter_mut' class='fnname'>iter_mut</a>(&amp;mut self) -&gt; <a class="struct" href="../c_linked_list/struct.IterMut.html" title="struct c_linked_list::IterMut">IterMut</a>&lt;T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>, F&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#134-139' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Provides a forward iterator with mutable references.</p>
+</div><h4 id='method.len-1' class="method"><span id='len.v-1' class='invisible'><code>pub fn <a href='#method.len-1' class='fnname'>len</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#142-150' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns the length of the <code>CLinkedList</code>.</p>
+</div><h4 id='method.contains-1' class="method"><span id='contains.v-1' class='invisible'><code>pub fn <a href='#method.contains-1' class='fnname'>contains</a>(&amp;self, x: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a>&lt;T&gt;,&nbsp;</span></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#154-159' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns <code>true</code> if the <code>CLinkedList</code> contains an element equal to the
+given value.</p>
+</div><h4 id='method.front_mut' class="method"><span id='front_mut.v' class='invisible'><code>pub fn <a href='#method.front_mut' class='fnname'>front_mut</a>(&amp;mut self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#163-169' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Provides a mutable reference to the front element, or <code>None</code> if the list
+is empty.</p>
+</div></div><h3 id='impl-2' class='impl'><span class='in-band'><code>impl&lt;T, P, F&gt; <a class="struct" href="../c_linked_list/struct.CLinkedList.html" title="struct c_linked_list::CLinkedList">CLinkedList</a>&lt;T, P, F&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T) -&gt; P,&nbsp;</span></code><a href='#impl-2' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#172-198' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.iter' class="method"><span id='iter.v' class='invisible'><code>pub fn <a href='#method.iter' class='fnname'>iter</a>(&amp;self) -&gt; <a class="struct" href="../c_linked_list/struct.Iter.html" title="struct c_linked_list::Iter">Iter</a>&lt;T, P, F&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#177-182' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Provides a forward iterator.</p>
+</div><h4 id='method.is_empty' class="method"><span id='is_empty.v' class='invisible'><code>pub fn <a href='#method.is_empty' class='fnname'>is_empty</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#185-187' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns <code>true</code> if the <code>CLinkedList</code> is empty.</p>
+</div><h4 id='method.front' class="method"><span id='front.v' class='invisible'><code>pub fn <a href='#method.front' class='fnname'>front</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#191-197' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Provides a reference to the front element, or <code>None</code> if the list is
+empty.</p>
+</div></div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-IntoIterator' class='impl'><span class='in-band'><code>impl&lt;'a, T:&nbsp;'a, F&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html" title="trait core::iter::traits::IntoIterator">IntoIterator</a> for &amp;'a <a class="struct" href="../c_linked_list/struct.CLinkedList.html" title="struct c_linked_list::CLinkedList">CLinkedList</a>&lt;T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const T</a>, F&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const T</a>,&nbsp;</span></code><a href='#impl-IntoIterator' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#287-297' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Item' class="type"><span id='Item.t' class='invisible'><code>type <a href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#associatedtype.Item' class="type">Item</a> = <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a </a>T</code></span></h4>
+<div class='docblock'><p>The type of the elements being iterated over.</p>
+</div><h4 id='associatedtype.IntoIter' class="type"><span id='IntoIter.t' class='invisible'><code>type <a href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#associatedtype.IntoIter' class="type">IntoIter</a> = <a class="struct" href="../c_linked_list/struct.Iter.html" title="struct c_linked_list::Iter">Iter</a>&lt;'a, T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const T</a>, F&gt;</code></span></h4>
+<div class='docblock'><p>Which kind of iterator are we turning this into?</p>
+</div><h4 id='method.into_iter' class="method"><span id='into_iter.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#tymethod.into_iter' class='fnname'>into_iter</a>(self) -&gt; <a class="struct" href="../c_linked_list/struct.Iter.html" title="struct c_linked_list::Iter">Iter</a>&lt;'a, T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const T</a>, F&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#294-296' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Creates an iterator from a value. <a href="https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#tymethod.into_iter">Read more</a></p>
+</div></div><h3 id='impl-IntoIterator-1' class='impl'><span class='in-band'><code>impl&lt;'a, T:&nbsp;'a, F&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html" title="trait core::iter::traits::IntoIterator">IntoIterator</a> for &amp;'a <a class="struct" href="../c_linked_list/struct.CLinkedList.html" title="struct c_linked_list::CLinkedList">CLinkedList</a>&lt;T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>, F&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>,&nbsp;</span></code><a href='#impl-IntoIterator-1' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#299-309' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Item-1' class="type"><span id='Item.t-1' class='invisible'><code>type <a href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#associatedtype.Item' class="type">Item</a> = <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a </a>T</code></span></h4>
+<div class='docblock'><p>The type of the elements being iterated over.</p>
+</div><h4 id='associatedtype.IntoIter-1' class="type"><span id='IntoIter.t-1' class='invisible'><code>type <a href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#associatedtype.IntoIter' class="type">IntoIter</a> = <a class="struct" href="../c_linked_list/struct.Iter.html" title="struct c_linked_list::Iter">Iter</a>&lt;'a, T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>, F&gt;</code></span></h4>
+<div class='docblock'><p>Which kind of iterator are we turning this into?</p>
+</div><h4 id='method.into_iter-1' class="method"><span id='into_iter.v-1' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#tymethod.into_iter' class='fnname'>into_iter</a>(self) -&gt; <a class="struct" href="../c_linked_list/struct.Iter.html" title="struct c_linked_list::Iter">Iter</a>&lt;'a, T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>, F&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#306-308' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Creates an iterator from a value. <a href="https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#tymethod.into_iter">Read more</a></p>
+</div></div><h3 id='impl-IntoIterator-2' class='impl'><span class='in-band'><code>impl&lt;'a, T:&nbsp;'a, F&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html" title="trait core::iter::traits::IntoIterator">IntoIterator</a> for &amp;'a mut <a class="struct" href="../c_linked_list/struct.CLinkedList.html" title="struct c_linked_list::CLinkedList">CLinkedList</a>&lt;T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>, F&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>,&nbsp;</span></code><a href='#impl-IntoIterator-2' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#311-321' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Item-2' class="type"><span id='Item.t-2' class='invisible'><code>type <a href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#associatedtype.Item' class="type">Item</a> = <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a mut </a>T</code></span></h4>
+<div class='docblock'><p>The type of the elements being iterated over.</p>
+</div><h4 id='associatedtype.IntoIter-2' class="type"><span id='IntoIter.t-2' class='invisible'><code>type <a href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#associatedtype.IntoIter' class="type">IntoIter</a> = <a class="struct" href="../c_linked_list/struct.IterMut.html" title="struct c_linked_list::IterMut">IterMut</a>&lt;'a, T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>, F&gt;</code></span></h4>
+<div class='docblock'><p>Which kind of iterator are we turning this into?</p>
+</div><h4 id='method.into_iter-2' class="method"><span id='into_iter.v-2' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#tymethod.into_iter' class='fnname'>into_iter</a>(self) -&gt; <a class="struct" href="../c_linked_list/struct.IterMut.html" title="struct c_linked_list::IterMut">IterMut</a>&lt;'a, T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>, F&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#318-320' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Creates an iterator from a value. <a href="https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html#tymethod.into_iter">Read more</a></p>
+</div></div><h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a>, F&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../c_linked_list/struct.CLinkedList.html" title="struct c_linked_list::CLinkedList">CLinkedList</a>&lt;T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const T</a>, F&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*const T</a>,&nbsp;</span></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#323-330' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#327-329' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt">Read more</a></p>
+</div></div><h3 id='impl-Debug-1' class='impl'><span class='in-band'><code>impl&lt;T:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a>, F&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../c_linked_list/struct.CLinkedList.html" title="struct c_linked_list::CLinkedList">CLinkedList</a>&lt;T, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>, F&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut T</a>,&nbsp;</span></code><a href='#impl-Debug-1' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#332-339' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt-1' class="method"><span id='fmt.v-1' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/c_linked_list/lib.rs.html#336-338' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>↑</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>↓</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt style="width:31px;">+ / -</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "c_linked_list";
+    </script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

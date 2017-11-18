@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["CLinkedList","A linked list for wrapping a C linked list."],["Iter","An iterator over the elements of a `CLinkedList`."],["IterMut","A mutable iterator over the elements of a `CLinkedList`."]]});
